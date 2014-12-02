@@ -80,6 +80,12 @@ class Form(WufooObject):
         filter_string = urllib.urlencode(output).replace('__', '+')
         return self.get_entries(filter_string=filter_string)
 
+    def get_entry(self, entry_id):
+        url = "%s?Filter1=EntryId+Is_equal_to+%s" % (self.LinkEntries, entry_id)
+        entries_json = self.api.make_call(url)
+        entry = entries_json['Entries'][0]
+        return entry
+
     def get_entries(self, page_start=0, page_size=100, sort_field='DateCreated', sort_direction='DESC', filter_string=None):
         url = "%s?system=true&pageStart=%s&pageSize=%s&sort=%s&sortDirection=%s" % (self.LinkEntries, page_start, page_size, sort_field, sort_direction)
         if filter_string:
@@ -264,9 +270,9 @@ class PyfooAPI(object):
         post_params_string = ''
         if post_params:
             post_params_string = ''.join(post_params.keys())
-        test_script = open('scripts/%s%s.json' % (url.replace('/', '_'), post_params_string), 'w')
-        test_script.write(json_string)
-        test_script.close()
+        #test_script = open('scripts/%s%s.json' % (url.replace('/', '_'), post_params_string), 'w')
+        #test_script.write(json_string)
+        #test_script.close()
         try:
             json_object = json.loads(json_string)
             

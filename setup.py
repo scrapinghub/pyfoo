@@ -4,11 +4,10 @@ from setuptools import setup, find_packages
 
 setup(
         name = "pyfoo",
-        version = "",
+        version = "0.2",
         description = 'Python wrapper around the Wufoo API',
         long_description = open('README.markdown').read(),
-        author = '',
-        author_email = '',
+        license='MIT',
         keywords = 'python',
         classifiers = [
             'Intended Audience :: Developers',
